@@ -14,16 +14,24 @@ app.get("/livros", async (_, res) => {
 });
 
 app.post("/livros", async (req, res) => {
-  const response = await LivrosModel.create({
-    id: req.body.id,
-    titulo: req.body.titulo,
-    num_paginas: req.body.num_paginas,
-    isbn: req.body.isbn,
-    editora: req.body.editora,
-  });
-  return res.status(200).json({
-    data: response,
-  });
+  const { id, titulo, num_paginas, isbn, editora } = req.body;
+
+  try {
+    const response = await LivrosModel.create({
+      id: id,
+      titulo: titulo,
+      num_paginas: num_paginas,
+      isbn: isbn,
+      editora: editora,
+    });
+
+    return res.status(200).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Erro ao cadastrar livro:", error);
+    return res.status(500).json({ mensagem: "Erro ao cadastrar livro." });
+  }
 });
 
 app.get("/livros/:id", async (req, res) => {
