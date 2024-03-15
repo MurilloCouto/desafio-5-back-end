@@ -4,12 +4,8 @@ import LivrosModel from "./module/livros/livros.model.js";
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*", // ou ajuste para a origem específica do seu frontend
-    methods: ["GET", "POST", "PUT", "DELETE"], // ou ajuste para os métodos permitidos
-  })
-);
+app.use(cors());
+app.options("*", cors());
 
 const PORT = process.env.PORT || 3000;
 
