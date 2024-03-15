@@ -56,7 +56,7 @@ app.put("/livros/edicao/:id", async (req, res) => {
   try {
     const livroId = req.params.id;
 
-    const updatedLivro = await LivrosModel.findOneAndUpdate(
+    const updatedLivro = await LivrosModel.updateOne(
       { id: livroId },
       req.body,
       { new: true }
