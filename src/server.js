@@ -65,7 +65,9 @@ app.put("/livros/:id", async (req, res) => {
       return res.status(404).json({ mensagem: "Livro não encontrado." });
     }
 
-    return res.status(200).json({ mensagem: "Livro atualizado com sucesso!" });
+    return res
+      .status(200)
+      .json({ mensagem: "Livro atualizado com sucesso!", livro: updatedLivro });
   } catch (error) {
     console.error("Erro durante a edição do livro:", error);
     return res
