@@ -18,7 +18,7 @@ app.post("/livros/cadastro", async (req, res) => {
   const { id, titulo, num_paginas, isbn, editora } = req.body;
 
   try {
-    const response = await LivrosModel.create({
+    const novoLivro = await LivrosModel.create({
       id: id,
       titulo: titulo,
       num_paginas: num_paginas,
@@ -26,9 +26,11 @@ app.post("/livros/cadastro", async (req, res) => {
       editora: editora,
     });
 
+    const livroCriado = await LivrosModel.findOne({ _id: novoLivro._id });
+
     return res.status(201).json({
       mensagem: "Livro cadastrado com sucesso!",
-      data: response,
+      livro: livroCriado,
     });
   } catch (error) {
     console.error("Erro ao cadastrar livro:", error);
@@ -56,7 +58,7 @@ app.put("/livros/edicao/:id", async (req, res) => {
   try {
     const livroId = req.params.id;
 
-    const updatedLivro = await LivrosModel.updateOne(
+    const updatedLivro = await LivrosModel.findOneAndUpdate(
       { id: livroId },
       req.body,
       { new: true }
