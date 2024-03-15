@@ -5,7 +5,6 @@ import LivrosModel from "./module/livros/livros.model.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.options("*", cors());
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,27 +14,16 @@ app.get("/livros", async (_, res) => {
 });
 
 app.post("/livros/cadastro", async (req, res) => {
-  const { id, titulo, num_paginas, isbn, editora } = req.body;
-
-  try {
-    const novoLivro = await LivrosModel.create({
-      id: id,
-      titulo: titulo,
-      num_paginas: num_paginas,
-      isbn: isbn,
-      editora: editora,
-    });
-
-    const livroCriado = await LivrosModel.findOne({ _id: novoLivro._id });
-
-    return res.status(201).json({
-      mensagem: "Livro cadastrado com sucesso!",
-      livro: livroCriado,
-    });
-  } catch (error) {
-    console.error("Erro ao cadastrar livro:", error);
-    return res.status(500).json({ mensagem: "Erro ao cadastrar livro." });
-  }
+  const response = await LivrosModel.create({
+    id: req.body.id,
+    titulo: req.body.titulo,
+    num_paginas: req.body.num_paginas,
+    isbn: req.body.isbn,
+    editora: req.body.editora,
+  });
+  return res.status(200).json({
+    data: response,
+  });
 });
 
 app.get("/livros/edicao/:id", async (req, res) => {
