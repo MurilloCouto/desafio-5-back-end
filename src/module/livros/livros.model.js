@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const livroSchema = new Schema(
   {
-    id: Number,
-    titulo: String,
-    num_paginas: Number,
-    isbn: String,
-    editora: String,
+    id: { type: Number, required: true },
+    titulo: { type: String, required: true },
+    num_paginas: { type: Number, required: true },
+    isbn: { type: String, required: true },
+    editora: { type: String, required: true },
   },
   {
     timestamps: true,

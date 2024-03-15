@@ -46,6 +46,8 @@ app.put("/livros/edicao/:id", async (req, res) => {
   try {
     const livroId = req.params.id;
 
+    console.log(req.body);
+
     const updatedLivro = await LivrosModel.findOneAndUpdate(
       { id: livroId },
       req.body,
