@@ -14,7 +14,7 @@ app.get("/livros", async (_, res) => {
   return res.status(200).json(livros);
 });
 
-app.post("/livros", async (req, res) => {
+app.post("/livros/cadastro", async (req, res) => {
   const { id, titulo, num_paginas, isbn, editora } = req.body;
 
   try {
@@ -52,7 +52,7 @@ app.get("/livros/:id", async (req, res) => {
   }
 });
 
-app.put("/livros/:id", async (req, res) => {
+app.put("/livros/edicao/:id", async (req, res) => {
   try {
     const livroId = req.params.id;
 
