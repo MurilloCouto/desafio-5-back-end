@@ -26,7 +26,8 @@ app.post("/livros", async (req, res) => {
       editora: editora,
     });
 
-    return res.status(200).json({
+    return res.status(201).json({
+      mensagem: "Livro cadastrado com sucesso!",
       data: response,
     });
   } catch (error) {
