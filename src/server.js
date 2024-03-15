@@ -38,7 +38,7 @@ app.post("/livros/cadastro", async (req, res) => {
   }
 });
 
-app.get("/livros/:id", async (req, res) => {
+app.get("/livros/edicao/:id", async (req, res) => {
   try {
     const livroId = req.params.id;
     const livro = await LivrosModel.findOne({ id: livroId });
