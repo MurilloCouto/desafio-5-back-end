@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "src/server.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     { "src": "/livros", "dest": "src/server.js" },
+    { "src": "/livros/cadastro", "dest": "src/server.js" },
+    { "src": "/livros/edicao/:id", "dest": "src/server.js" },
     { "src": "/livros/:id", "dest": "src/server.js" },
     { "src": "/(.*)", "dest": "src/server.js" }
   ]
