@@ -33,8 +33,9 @@ app.get("/livros/edicao/:id", async (req, res) => {
 });
 
 app.put("/livros/edicao/:id", async (req, res) => {
-  const livro = await LivrosModel.updateOne({ id: req.params.id }, req.body);
-  return res.status(200).json(livro);
+  await LivrosModel.updateOne({ id: req.params.id }, req.body);
+  const livroAtualizado = await LivrosModel.findOne({ id: req.params.id });
+  return res.status(200).json(livroAtualizado);
 });
 
 app.delete("/livros/:id", async (req, res) => {
